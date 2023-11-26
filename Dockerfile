@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY yarn.lock ./
 # Install dependencies (do this before copying the application code to take advantage of Docker layer caching)
-RUN yarn install --production
+RUN yarn install
 
 # Copy the application code to the container
 COPY . .
