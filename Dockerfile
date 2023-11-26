@@ -9,4 +9,4 @@ RUN npm ci
 COPY . /app
 
 EXPOSE 8000
-CMD ["yarn", "dev"]
+CMD ["npm", "run", "dev"]
