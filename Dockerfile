@@ -1,12 +1,15 @@
-FROM node:18-alpine3.17 
+FROM node:18-alpine3.17
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json .
+COPY yarn.lock .
 COPY /vendor ./vendor
 
-RUN npm ci --production
-COPY . /usr/src/app
+RUN yarn install
+RUN chown -R node:node /app/node_modules
+
+COPY . /app
+CMD ["yarn", "dev"]
 
 EXPOSE 8000
-CMD ["npm", "run", "dev"]

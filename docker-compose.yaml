@@ -5,9 +5,9 @@ services:
     build: .
     ports:
       - ${APP_PORT}:${APP_PORT}
-    working_dir: /usr/src/app
+    working_dir: /app
     volumes:
-      - .:/usr/src/app
+      - .:/app
     depends_on:
       - postgres
   hasura-engine:
