@@ -1,16 +1,18 @@
-FROM node:18-alpine3.17 AS builder
+FROM node:18-alpine3.17
 
-WORKDIR /module
-COPY package*.json .
-COPY yarn.lock .
-COPY /vendor ./vendor
-RUN yarn install
+WORKDIR /usr/src/app
 
-FROM node:18-alpine3.17 AS production
+# Copy package.json and package-lock.json to the working directory
+COPY package.json ./
+COPY yarn.lock ./
+# Install dependencies (do this before copying the application code to take advantage of Docker layer caching)
+RUN yarn install --production
 
-WORKDIR /app
-COPY --from=builder /module/node_modules ./node_modules
-COPY . /app
+# Copy the application code to the container
+COPY . .
 
-CMD ["yarn", "dev"]
+# Expose the port your app runs on
 EXPOSE 8000
+
+# Specify the command to run your application
+CMD ["yarn", "start"]
