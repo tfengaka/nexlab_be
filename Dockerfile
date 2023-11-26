@@ -1,10 +1,10 @@
 FROM node:18-alpine3.17
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
-COPY package.json ./
-COPY yarn.lock ./
+COPY package.json .
+COPY yarn.lock .
 COPY vendor ./vendor
 # Install dependencies (do this before copying the application code to take advantage of Docker layer caching)
 RUN yarn install
@@ -16,4 +16,4 @@ COPY . .
 EXPOSE 8000
 
 # Specify the command to run your application
-CMD ["yarn", "start"]
+CMD ["yarn", "dev"]

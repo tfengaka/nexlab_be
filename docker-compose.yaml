@@ -1,13 +1,13 @@
 version: '3.3'
 services:
-  express-app:
+  express:
     container_name: express
     build: .
-    restart: unless-stopped
     ports:
       - ${APP_PORT}:${APP_PORT}
+    working_dir: /app
     volumes:
-      - .:/usr/src/app
+      - .:/app
     depends_on:
       - postgres
   hasura-engine:
@@ -30,4 +30,4 @@ services:
       EVENT_BASE_ENDPOINT: http://express:${APP_PORT}/events
       CRONJOB_BASE_ENDPOINT: http://express:${APP_PORT}/cronjobs
     depends_on:
-      - express-app
+      - express
