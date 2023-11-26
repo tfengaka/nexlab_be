@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "npx nodemon",
     "build": "rm -rf ./dist && tsc && tsc-alias",
     "start": "yarn build && node dist/index.js",
     "lint": "eslint .",
